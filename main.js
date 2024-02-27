@@ -1,3 +1,4 @@
+// DO NOT USE ES-Module Style IN THIS FILE
 const watch = require('node-watch')
 const ws = require('nodejs-websocket')
 const ini = require('ini')
