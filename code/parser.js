@@ -1,20 +1,23 @@
 function scheduleHtmlParser(html) {
   /** 课程信息 */
   let courseInfos = [];
-  const lines = $(".addlist_01").find("tr"); // 表的所有行
-  for (let l = 1; l <= 6; l++) {
-    // 1-6行为课程
-    const linelessons = $(lines[l]).find("td");
+  // const lines = $(".addlist_01").find("tr"); // 表的所有行
+  const lines = $(".kbappTimetableDayColumnRoot___1DlDV"); // 表的所有行
+  console.info("-----begin------")
+  console.info(lines)
+  console.info("------end------")
+  lines.each(function () {
+    const linelessons = $(this).find(".kbappTimetableDayColumnConflictContainer___128M6");
     for (let day = 1; day <= 7; day++) {
       // 1-7列为每一天
       const index = day + 1; // 列标为天数+1
       const text = getText(linelessons[index]);
       console.info("----------");
       if (text[0] === "&nbsp;") {
-        console.info("第" + l + "行第" + day + "列为空");
+        console.info("列为空");
         continue;
       }
-      console.info("开始解析第" + l + "行第" + day + "列：\n" + text);
+      console.info("开始解析" + text);
       let lessons;
       if (text.length === 1) {
         // 暂时没有仅一行的课程信息
@@ -38,7 +41,8 @@ function scheduleHtmlParser(html) {
       }
       courseInfos.push(...lessons);
     }
-  }
+    // 1-6行为课程
+  });
   return courseInfos;
 }
 
