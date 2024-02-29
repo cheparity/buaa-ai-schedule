@@ -1,21 +1,34 @@
 /**
  * 时间配置函数，此为入口函数，不要改动函数名
+ * @author MeanZhang
  */
 async function scheduleTimer({ providerRes, parserRes } = {}) {
   //周数，包括两周考试周，春18秋19夏9
   let totalWeek = 19;
-  if (
-    providerRes.indexOf("春季学期") >= 0 &&
-    providerRes.indexOf("春季学期") < 150
-  ) {
+  if (providerRes.includes("春季")) {
     totalWeek = 18;
-  } else if (
-    providerRes.indexOf("秋季学期") >= 0 &&
-    providerRes.indexOf("秋季学期") < 150
-  ) {
+  } else if (providerRes.includes("秋季")) {
     totalWeek = 19;
-  } else {
+  } else if (providerRes.includes("夏季")) {
     totalWeek = 9;
+  } else {
+    await loadTool('AIScheduleTools')
+    const userSelect = await AIScheduleSelect({
+      titleText: '选择学期', // 标题内容，字体比较大，超过10个字不给显示的喔，也可以不传就不显示
+      contentText: '自动解析周数错误，请手动选择学期', // 提示信息，字体稍小，支持使用``达到换行效果，具体使用效果建议真机测试，为必传，不传显示版本号
+      selectList: [
+        '春季',
+        '秋季',
+        '夏季',
+      ], // 选项列表，数组，为必传
+    })
+    if (userSelect === '春季') {
+      totalWeek = 18;
+    } else if (userSelect === '秋季') {
+      totalWeek = 19;
+    } else {
+      totalWeek = 9;
+    }
   }
   //课程时间
   const sections = [
@@ -90,7 +103,7 @@ async function scheduleTimer({ providerRes, parserRes } = {}) {
       endTime: "22:15",
     },
   ];
-  return {
+  timerRes = {
     totalWeek: totalWeek, // 总周数：[1, 30]之间的整数
     startSemester: "", // 开学时间：时间戳，13位长度字符串，推荐用代码生成
     startWithSunday: false, // 是否是周日为起始日，该选项为true时，会开启显示周末选项
@@ -100,4 +113,8 @@ async function scheduleTimer({ providerRes, parserRes } = {}) {
     night: 4, // 晚间课程节数：[0, 10]之间的整数
     sections: sections, // 课程时间表，注意：总长度要和上边配置的节数加和对齐
   };
+  await loadTool('AIScheduleTools')
+  await AIScheduleAlert('导入成功！本导入系统为新系统，请核对周数等课程信息，如有问题请联系开发者QQ：3452811884（落*）')
+  console.info(timerRes);
+  return timerRes;
 }

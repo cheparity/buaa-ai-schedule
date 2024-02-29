@@ -1,15 +1,16 @@
 # 小爱课程表 北京航空航天大学-本科教务管理系统
 
-## ⚠️ 本项目已停止维护，开发者已毕业，有兴趣的同学可以 fork 后继续开发
-
 <p align="center">
-  <a href="https://github.com/MeanZhang" alt="开发者">
-    <img src="https://img.shields.io/badge/开发者-Mean-blue?logo=github">
+  <a href="https://github.com/MeanZhang" alt="原开发者">
+    <img src="https://img.shields.io/badge/原开发者-Mean-blue?logo=github">
   </a>
-  <a href="https://github.com/MeanZhang/buaa-ai-schedule" alt="使用人数">
-    <img src="https://api.meancoder.xyz/schedule">
+  <a href="https://github.com/cheparity" alt="开发者">
+    <img src="https://img.shields.io/badge/开发者-Niyuta-yello?logo=github">
   </a>
 </p>
+
+本项目为由[MeanZhang](https://github.com/MeanZhang)创建，现由[Niyuta](https://github.com/cheparity)维护的小爱课表北航教务自动导入系统。Niyuta作为使用了三年的受益者，谨代表所有使用过该项目的朋友感谢原开发者带来的贡献~
+
 
 这是[小爱课程表](https://open-schedule-prod.ai.xiaomi.com/docs/#/help/)北航本科教务适配项目。
 
